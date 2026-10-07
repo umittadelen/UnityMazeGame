@@ -1,4 +1,0 @@
-repository "MazeRunner/MazeRunner@11270259002778@cloud"
-  path "/"
-    br "/main"
-    co "/main"
