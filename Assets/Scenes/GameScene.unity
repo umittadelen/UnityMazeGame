@@ -340,6 +340,14 @@ PrefabInstance:
       propertyPath: m_CullingMask.m_Bits
       value: 4294967295
       objectReference: {fileID: 0}
+    - target: {fileID: 4436865351281601900, guid: 0b4a523f97b9b894da26421d4dc91c7b, type: 3}
+      propertyPath: m_Intensity
+      value: 0.09
+      objectReference: {fileID: 0}
+    - target: {fileID: 4436865351281601900, guid: 0b4a523f97b9b894da26421d4dc91c7b, type: 3}
+      propertyPath: m_BounceIntensity
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7246015367505849220, guid: 0b4a523f97b9b894da26421d4dc91c7b, type: 3}
       propertyPath: m_Dithering
       value: 1
