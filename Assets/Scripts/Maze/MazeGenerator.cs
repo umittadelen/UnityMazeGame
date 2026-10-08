@@ -153,37 +153,35 @@ public class MazeGenerator : MonoBehaviour
     }
 
     // --- 2. INSTANTIATION (Visuals) ---
-    // Called by MazeChunkManager
     public MazeCell InstantiateCellAt(int x, int y, int z, Transform parent)
     {
-        // Safety check
         if (!IsWithinBounds(new Vector3Int(x, y, z))) return null;
 
-        // 1. Create Object
         Vector3 pos = new Vector3(x, y, z) * cellSize;
         MazeCell cell = Instantiate(_mazeCellPrefab, pos, Quaternion.identity, parent);
         cell.name = $"Cell_{x}_{y}_{z}";
 
-        // 2. Reset Visual State (Hide Unvisited Block, Hide End Block)
-        cell.Visit(); 
+        cell.Visit();
 
-        // 3. Apply Wall State from Data
         MazeCellData data = _mazeData[x, y, z];
 
-        // Only clear the wall if the Data says "Wall is FALSE" (Open)
-        // If data.WallLeft is TRUE, we do nothing (Prefab default should be Wall Visible)
-        if (!data.WallLeft) cell.ClearLeftWall();
-        if (!data.WallRight) cell.ClearRightWall();
-        if (!data.WallUp) cell.ClearTopWall();
-        if (!data.WallDown) cell.ClearDownWall();
-        if (!data.WallFront) cell.ClearFrontWall();
-        if (!data.WallBack) cell.ClearBackWall();
+        bool isLeftBoundary = (x == 0);
+        bool isRightBoundary = (x == _mazeWidth - 1);
+        bool isBackBoundary = (z == 0);
+        bool isFrontBoundary = (z == _mazeDepth - 1);
+        bool isBottomBoundary = (y == 0);
 
-        // 4. End Block Logic
+        // Render only 3 faces per cell (Right, Front, Up) to prevent double walls.
+        // Boundary walls always stay intact to contain the maze.
+        if (!isLeftBoundary) cell.ClearLeftWall();
+        if (!isBackBoundary) cell.ClearBackWall();
+        if (!isBottomBoundary) cell.ClearDownWall();
+        if (!isRightBoundary && !data.WallRight) cell.ClearRightWall();
+        if (!isFrontBoundary && !data.WallFront) cell.ClearFrontWall();
+        if (!data.WallUp) cell.ClearTopWall();
+
         if (x == _furthestCellPos.x && y == _furthestCellPos.y && z == _furthestCellPos.z)
-        {
             cell.ActivateEndBlock();
-        }
 
         return cell;
     }
