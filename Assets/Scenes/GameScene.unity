@@ -524,9 +524,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1386079271955052316, guid: 0b4a523f97b9b894da26421d4dc91c7b, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1835922108}
-    - targetCorrespondingSourceObject: {fileID: 1386079271955052316, guid: 0b4a523f97b9b894da26421d4dc91c7b, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1835922114}
   m_SourcePrefab: {fileID: 100100000, guid: 0b4a523f97b9b894da26421d4dc91c7b, type: 3}
 --- !u!1 &274848210
 GameObject:
@@ -2326,18 +2323,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MazeFogAutoTuner
   _voidColor: {r: 0, g: 0, b: 0, a: 1}
   _fogDensity: 0.9
---- !u!114 &1835922114
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1835922096}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1ff56a4b269e5d144b12e88d15007ba1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CaptureGameView
 --- !u!1 &1908271892
 GameObject:
   m_ObjectHideFlags: 0
