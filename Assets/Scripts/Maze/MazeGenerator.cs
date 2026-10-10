@@ -12,7 +12,9 @@ public class MazeGenerator : MonoBehaviour
     [SerializeField] public int _mazeWidth = 30;
     [SerializeField] public int _mazeHeight = 30;
     [SerializeField] public int _mazeDepth = 30;
-    [SerializeField] public float cellSize = 2f;
+    [SerializeField] public float cellSizeX = 1.2f;
+    [SerializeField] public float cellSizeY = 1.1f;
+    [SerializeField] public float cellSizeZ = 1.2f;
 
     [Header("Seed")]
     [SerializeField] private int _seed = -1;
@@ -37,6 +39,10 @@ public class MazeGenerator : MonoBehaviour
     {
         return _usedSeed;
     }
+
+    public float CellSizeX => cellSizeX;
+    public float CellSizeY => cellSizeY;
+    public float CellSizeZ => cellSizeZ;
 
     // --- Data Storage ---
     public struct MazeCellData
@@ -157,7 +163,7 @@ public class MazeGenerator : MonoBehaviour
     {
         if (!IsWithinBounds(new Vector3Int(x, y, z))) return null;
 
-        Vector3 pos = new Vector3(x, y, z) * cellSize;
+        Vector3 pos = new Vector3(x * cellSizeX, y * cellSizeY, z * cellSizeZ);
         MazeCell cell = Instantiate(_mazeCellPrefab, pos, Quaternion.identity, parent);
         cell.name = $"Cell_{x}_{y}_{z}";
 

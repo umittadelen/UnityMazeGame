@@ -24,7 +24,7 @@ public class MazeFogAutoTuner : MonoBehaviour
         // otherwise fallback to hardcoded defaults or defaults in the ChunkManager.
         int renderDist = 1;
         int chunkSize = 5;
-        float cellSize = 2f;
+        float cellSize = 2f; // Average cell size for fog calculation
 
         if (MazeGameManager.Instance != null)
         {
@@ -34,7 +34,8 @@ public class MazeFogAutoTuner : MonoBehaviour
         
         if (generator != null)
         {
-            cellSize = generator.cellSize;
+            // Use average of X, Y, Z cell sizes for fog calculation
+            cellSize = (generator.CellSizeX + generator.CellSizeY + generator.CellSizeZ) / 3f;
         }
 
         // 2. Calculate the "Edge of the World"

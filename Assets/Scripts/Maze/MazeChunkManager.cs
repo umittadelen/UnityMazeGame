@@ -145,12 +145,14 @@ public class MazeChunkManager : MonoBehaviour
 
     private Vector3Int GetChunkCoordinate(Vector3 position)
     {
-        float realChunkSize = _chunkSize * _mazeGenerator.cellSize;
+        float realChunkSizeX = _chunkSize * _mazeGenerator.CellSizeX;
+        float realChunkSizeY = _chunkSize * _mazeGenerator.CellSizeY;
+        float realChunkSizeZ = _chunkSize * _mazeGenerator.CellSizeZ;
         
         return new Vector3Int(
-            Mathf.FloorToInt(position.x / realChunkSize),
-            Mathf.FloorToInt(position.y / realChunkSize),
-            Mathf.FloorToInt(position.z / realChunkSize)
+            Mathf.FloorToInt(position.x / realChunkSizeX),
+            Mathf.FloorToInt(position.y / realChunkSizeY),
+            Mathf.FloorToInt(position.z / realChunkSizeZ)
         );
     }
 
