@@ -1,6 +1,6 @@
 # 🌸 Maze Runner 🌸
 
-[![License](https://img.shields.io/badge/🌸%20License-CC%20BY--ND%204.0-ff69b4.svg)](LICENSE)
+[![License](https://img.shields.io/badge/🌸%20License-All%20Rights%20Reserved-ff69b4.svg)](LICENSE)
 [![Unity Version](https://img.shields.io/badge/🎮%20Unity-2020%2B-ff69b4.svg)](https://unity.com/)
 [![Platform](https://img.shields.io/badge/🌸%20Platform-Windows%20%7C%20Mac%20%7C%20Linux-ff69b4.svg)]()
 
@@ -34,7 +34,7 @@ Download the latest release from the [Releases](https://github.com/umittadelen/U
 
 ## 🌸 License
 
-CC BY-ND 4.0 — Creative Commons Attribution-NoDerivatives
+<p align="center">Copyright © 2026 Umit Tadelen. All rights reserved.</p>
 
 ---
 <p align="center"><i>Made with</i> ❤️ <i>and</i> ☕🌸</p>
