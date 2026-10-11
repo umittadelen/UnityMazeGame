@@ -10,6 +10,9 @@ public class GitHubUpdateChecker : MonoBehaviour
     [Header("UI")]
     [SerializeField] private Button updateButton;
 
+    [Header("Settings")]
+    [SerializeField] private bool allowPrereleaseVersions = false;
+
     private const string ReleasesApi =
         "https://api.github.com/repos/umittadelen/UnityMazeGame/releases";
 
@@ -37,36 +40,24 @@ public class GitHubUpdateChecker : MonoBehaviour
     private IEnumerator CheckForUpdates()
     {
         string suffix = GetPlatformSuffix();
-
-        if (string.IsNullOrEmpty(suffix))
+        if (string.IsNullOrEmpty(suffix) || updateButton == null)
             yield break;
-
-        if (updateButton == null)
-        {
-            Debug.LogError("Update button is not assigned!");
-            yield break;
-        }
 
         using var request = UnityWebRequest.Get(ReleasesApi);
         request.timeout = 8;
         request.SetRequestHeader("Accept", "application/vnd.github+json");
-
         yield return request.SendWebRequest();
 
         if (request.result != UnityWebRequest.Result.Success)
         {
-            Debug.LogWarning(
-                "Could not check for game updates: " + request.error);
+            Debug.LogError($"GitHub API unreachable: {request.error}");
             yield break;
         }
 
         ReleaseList releaseList;
-
         try
         {
-            string json = "{\"releases\":" +
-                          request.downloadHandler.text + "}";
-
+            string json = "{\"releases\":" + request.downloadHandler.text + "}";
             releaseList = JsonUtility.FromJson<ReleaseList>(json);
         }
         catch (Exception e)
@@ -75,50 +66,30 @@ public class GitHubUpdateChecker : MonoBehaviour
             yield break;
         }
 
-        if (releaseList?.releases == null)
+        if (releaseList?.releases == null || !TryParseVersion(Application.version, out Version currentVersion))
             yield break;
 
-        if (!TryParseVersion(Application.version, out Version currentVersion))
-        {
-            Debug.LogWarning(
-                "Invalid Player version: " + Application.version);
-            yield break;
-        }
+        LogAvailableVersions(releaseList, suffix);
 
         ReleaseInfo newestRelease = null;
         Version newestVersion = null;
 
         foreach (ReleaseInfo release in releaseList.releases)
         {
-            if (release == null ||
-                release.draft ||
-                release.prerelease ||
-                string.IsNullOrEmpty(release.tag_name) ||
-                string.IsNullOrEmpty(release.html_url))
-            {
+            if (!IsValidRelease(release, suffix))
                 continue;
-            }
-
-            // Only consider releases for this player's platform.
-            if (!release.tag_name.EndsWith(
-                suffix, StringComparison.OrdinalIgnoreCase))
-            {
-                continue;
-            }
 
             if (!TryParseVersion(release.tag_name, out Version version))
                 continue;
 
-            // Find the highest version for this platform.
-            if (newestVersion == null ||
-                version.CompareTo(newestVersion) > 0)
+            if (newestVersion == null || version.CompareTo(newestVersion) > 0)
             {
                 newestVersion = version;
                 newestRelease = release;
             }
         }
 
-        if (newestRelease == null || newestVersion == null)
+        if (newestRelease == null)
         {
             Debug.Log("No compatible releases found for " + suffix);
             yield break;
@@ -130,14 +101,33 @@ public class GitHubUpdateChecker : MonoBehaviour
             yield break;
         }
 
-        Debug.Log(
-            $"Update available: {currentVersion} -> {newestVersion}");
-
-        // Enable the update button
-        updateButton.onClick.AddListener(
-            () => Application.OpenURL(newestRelease.html_url));
-
+        Debug.Log($"Update available: {currentVersion} -> {newestVersion}");
+        updateButton.onClick.AddListener(() => Application.OpenURL(newestRelease.html_url));
         updateButton.gameObject.SetActive(true);
+    }
+
+    private void LogAvailableVersions(ReleaseList releaseList, string suffix)
+    {
+        int count = 0;
+        foreach (var release in releaseList.releases)
+        {
+            if (count >= 5 || release?.tag_name == null || !release.tag_name.EndsWith(suffix, StringComparison.OrdinalIgnoreCase))
+                continue;
+
+            string status = release.draft ? "[DRAFT] " : release.prerelease ? "[PRERELEASE] " : "";
+            Debug.Log($"Found version: {status}{release.tag_name}");
+            count++;
+        }
+    }
+
+    private bool IsValidRelease(ReleaseInfo release, string suffix)
+    {
+        return release != null && 
+               !release.draft && 
+               (allowPrereleaseVersions || !release.prerelease) &&
+               !string.IsNullOrEmpty(release.tag_name) && 
+               !string.IsNullOrEmpty(release.html_url) &&
+               release.tag_name.EndsWith(suffix, StringComparison.OrdinalIgnoreCase);
     }
 
     private static string GetPlatformSuffix()

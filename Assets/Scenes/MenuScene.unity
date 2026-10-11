@@ -877,6 +877,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GitHubUpdateChecker
   updateButton: {fileID: 1442567030}
+  allowPrereleaseVersions: 1
 --- !u!114 &120591089
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4525,6 +4526,7 @@ PrefabInstance:
     - {fileID: 7473454354602057149, guid: b5580d7b1d8f2bb41962454a49f40513, type: 3}
     - {fileID: 802116385828630132, guid: b5580d7b1d8f2bb41962454a49f40513, type: 3}
     - {fileID: 9105596961562043783, guid: b5580d7b1d8f2bb41962454a49f40513, type: 3}
+    - {fileID: 2108294447623198691, guid: b5580d7b1d8f2bb41962454a49f40513, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b5580d7b1d8f2bb41962454a49f40513, type: 3}
@@ -4591,6 +4593,7 @@ PrefabInstance:
     - {fileID: 6086807625772196901, guid: b5580d7b1d8f2bb41962454a49f40513, type: 3}
     - {fileID: 7473454354602057149, guid: b5580d7b1d8f2bb41962454a49f40513, type: 3}
     - {fileID: 9105596961562043783, guid: b5580d7b1d8f2bb41962454a49f40513, type: 3}
+    - {fileID: 2108294447623198691, guid: b5580d7b1d8f2bb41962454a49f40513, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b5580d7b1d8f2bb41962454a49f40513, type: 3}
@@ -4974,6 +4977,7 @@ PrefabInstance:
     - {fileID: 802116385828630132, guid: b5580d7b1d8f2bb41962454a49f40513, type: 3}
     - {fileID: 6086807625772196901, guid: b5580d7b1d8f2bb41962454a49f40513, type: 3}
     - {fileID: 7473454354602057149, guid: b5580d7b1d8f2bb41962454a49f40513, type: 3}
+    - {fileID: 2108294447623198691, guid: b5580d7b1d8f2bb41962454a49f40513, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b5580d7b1d8f2bb41962454a49f40513, type: 3}
@@ -5626,6 +5630,7 @@ PrefabInstance:
     - {fileID: 802116385828630132, guid: b5580d7b1d8f2bb41962454a49f40513, type: 3}
     - {fileID: 6086807625772196901, guid: b5580d7b1d8f2bb41962454a49f40513, type: 3}
     - {fileID: 7473454354602057149, guid: b5580d7b1d8f2bb41962454a49f40513, type: 3}
+    - {fileID: 2108294447623198691, guid: b5580d7b1d8f2bb41962454a49f40513, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b5580d7b1d8f2bb41962454a49f40513, type: 3}
@@ -6827,6 +6832,7 @@ PrefabInstance:
     - {fileID: 9105596961562043783, guid: b5580d7b1d8f2bb41962454a49f40513, type: 3}
     - {fileID: 13453028080563382, guid: b5580d7b1d8f2bb41962454a49f40513, type: 3}
     - {fileID: 4213636587386708201, guid: b5580d7b1d8f2bb41962454a49f40513, type: 3}
+    - {fileID: 2108294447623198691, guid: b5580d7b1d8f2bb41962454a49f40513, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b5580d7b1d8f2bb41962454a49f40513, type: 3}
@@ -7049,19 +7055,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1442567031}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 120591083}
-        m_TargetAssemblyTypeName: MainMenuController, Assembly-CSharp
-        m_MethodName: OpenNewGamePanel
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &1442567031
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8805,6 +8799,7 @@ PrefabInstance:
     - {fileID: 4213636587386708201, guid: b5580d7b1d8f2bb41962454a49f40513, type: 3}
     - {fileID: 6086807625772196901, guid: b5580d7b1d8f2bb41962454a49f40513, type: 3}
     - {fileID: 7473454354602057149, guid: b5580d7b1d8f2bb41962454a49f40513, type: 3}
+    - {fileID: 2108294447623198691, guid: b5580d7b1d8f2bb41962454a49f40513, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b5580d7b1d8f2bb41962454a49f40513, type: 3}
