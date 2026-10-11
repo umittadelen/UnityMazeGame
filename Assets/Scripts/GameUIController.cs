@@ -13,6 +13,8 @@ public class GameUIController : MonoBehaviour
     [SerializeField] private GameObject _endGamePanelDialog;
     [SerializeField] private TextMeshProUGUI _seedDisplayText;
 
+    [SerializeField] private AudioClip _winSound;
+
     private bool _isPaused = false;
     private int _currentSeed;
     private bool _gameEnded = false;
@@ -42,6 +44,7 @@ public class GameUIController : MonoBehaviour
 
     void Update()
     {
+        if (_gameEnded || Keyboard.current == null) return;
         if (Keyboard.current.escapeKey.wasPressedThisFrame)
         {
             if (_isPaused) ResumeGame();
@@ -130,6 +133,12 @@ public class GameUIController : MonoBehaviour
     {
         if (_gameEnded) return; // Don't trigger twice
         _gameEnded = true;
+
+        // Play win sound
+        if (_winSound != null)
+        {
+            AudioSource.PlayClipAtPoint(_winSound, Camera.main.transform.position);
+        }
 
         Debug.Log("Game Won! Showing UI.");
 

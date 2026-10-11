@@ -184,7 +184,8 @@ public class MazeGenerator : MonoBehaviour
         if (!isBottomBoundary) cell.ClearDownWall();
         if (!isRightBoundary && !data.WallRight) cell.ClearRightWall();
         if (!isFrontBoundary && !data.WallFront) cell.ClearFrontWall();
-        if (!data.WallUp) cell.ClearTopWall();
+        if (!data.WallUp){cell.ClearTopWall();}
+        else{cell.InitializeTopWall();}
 
         if (x == _furthestCellPos.x && y == _furthestCellPos.y && z == _furthestCellPos.z)
             cell.ActivateEndBlock();

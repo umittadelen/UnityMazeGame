@@ -8,6 +8,7 @@ public class MainMenuController : MonoBehaviour
     [SerializeField] private GameObject _mainMenuContainer;
     [SerializeField] private GameObject _newGameDialog;
     [SerializeField] private GameObject _settingsDialog;
+    [SerializeField] private GameObject _creditsDialog;
 
     [Header("New Game Inputs")]
     [SerializeField] private TMP_InputField _mazeXInput;
@@ -62,7 +63,7 @@ public class MainMenuController : MonoBehaviour
         h = Mathf.Max(1, h);
         d = Mathf.Max(1, d);
 
-        // 3. Compact Validation Logic
+        // 3. Validation Logic
         // If Width and Height are both 1, force Width to 2
         if (w == 1 && h == 1) w = 2;
         // If Depth is 1 and we still have another 1 (either W or H), force Depth to 2
@@ -78,14 +79,13 @@ public class MainMenuController : MonoBehaviour
         MazeGameManager.Instance.MazeWidth = w;
         MazeGameManager.Instance.MazeHeight = h;
         MazeGameManager.Instance.MazeDepth = d;
-        
+
         // Handle Seed logic (Random if -1 or empty)
         if (string.IsNullOrEmpty(_seedInput.text)) seed = -1;
         else if (seed == 0 && _seedInput.text != "0") seed = _seedInput.text.GetHashCode();
         
         MazeGameManager.Instance.Seed = seed;
 
-        // Load ChunkSize and RenderDistance using SettingsManager
         MazeGameManager.Instance.ChunkSize = SettingsManager.LoadInt("ChunkSize", MazeGameManager.Instance.ChunkSize);
         MazeGameManager.Instance.RenderDistance = SettingsManager.LoadInt("RenderDistance", MazeGameManager.Instance.RenderDistance);
 
@@ -96,9 +96,6 @@ public class MainMenuController : MonoBehaviour
 
     public void OpenSettingsPanel()
     {
-        // 1. Load current saved values into the UI
-        // This ensures if we cancelled previously, we see the real values again
-        // Load settings using SettingsManager
         int savedChunkSize = SettingsManager.LoadInt("ChunkSize", MazeGameManager.Instance.ChunkSize);
         int savedRenderDist = SettingsManager.LoadInt("RenderDistance", MazeGameManager.Instance.RenderDistance);
 
@@ -108,7 +105,6 @@ public class MainMenuController : MonoBehaviour
         if (_renderDistInput != null)
             _renderDistInput.text = savedRenderDist.ToString();
 
-        // 2. Show Panel
         _mainMenuContainer.SetActive(false);
         _settingsDialog.SetActive(true);
     }
@@ -118,7 +114,6 @@ public class MainMenuController : MonoBehaviour
         int cSize = 5;
         int rDist = 1;
 
-        // Remove the inline 'int' — just use out directly
         if (_chunkSizeInput != null && !int.TryParse(_chunkSizeInput.text, out cSize))
         {
             Debug.LogWarning($"Invalid chunk size input: '{_chunkSizeInput.text}', defaulting to 5");
@@ -141,17 +136,26 @@ public class MainMenuController : MonoBehaviour
         SettingsManager.SaveInt("ChunkSize", cSize);
         SettingsManager.SaveInt("RenderDistance", rDist);
 
-        // Confirm what actually got saved
-        Debug.Log($"Settings Saved: ChunkSize={cSize}, RenderDist={rDist}");
-
         _settingsDialog.SetActive(false);
+        _mainMenuContainer.SetActive(true);
+    }
+
+    // --- CREDITS LOGIC (Open & Close) ---
+
+    public void OpenCreditsPanel()
+    {
+        _mainMenuContainer.SetActive(false);
+        _creditsDialog.SetActive(true);
+    }
+
+    public void CloseCreditsPanel()
+    {
+        _creditsDialog.SetActive(false);
         _mainMenuContainer.SetActive(true);
     }
 
     public void CancelSettings()
     {
-        // 1. Just close the panel without saving
-        // The values in MazeGameManager remain unchanged
         Debug.Log("Settings Cancelled");
         _settingsDialog.SetActive(false);
         _mainMenuContainer.SetActive(true);

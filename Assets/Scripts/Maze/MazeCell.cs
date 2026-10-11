@@ -18,6 +18,9 @@ public class MazeCell : MonoBehaviour
     private GameObject _topWall;
 
     [SerializeField]
+    private GameObject _topWallLight; // .5% chance to be active
+
+    [SerializeField]
     private GameObject _downWall;
 
     [SerializeField]
@@ -57,9 +60,25 @@ public class MazeCell : MonoBehaviour
         _backWall.SetActive(false);
     }
 
+    public void InitializeTopWall()
+    {
+        float randomValue = Random.value;
+        if (randomValue < 0.05f) // 5% chance
+        {
+            _topWall.SetActive(false);
+            _topWallLight.SetActive(true);
+        }
+        else
+        {
+            _topWall.SetActive(true);
+            _topWallLight.SetActive(false);
+        }
+    }
+
     public void ClearTopWall()
     {
         _topWall.SetActive(false);
+        _topWallLight.SetActive(false);
     }
 
     public void ClearDownWall()
