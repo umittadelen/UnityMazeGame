@@ -31,6 +31,7 @@ Download the latest release from the [Releases](https://github.com/umittadelen/U
 | Move Right | D |
 | Jump | Space |
 | Look | Mouse |
+| Pointer | Alt |
 
 ## 🌸 License
 
