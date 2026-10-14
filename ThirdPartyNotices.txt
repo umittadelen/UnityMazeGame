@@ -1,0 +1,21 @@
+Third Party Notices
+
+This project may contain open source and third-party software components. 
+Please see below for the list of third-party software components and their licenses.
+
+---
+
+COMPONENT ATTRIBUTION TEMPLATE:
+(When third-party libraries are added to this project, please add them below)
+
+Component Name: [Name]
+License: [License Type]
+License Text/URL: [URL or license text]
+Copyright: [Copyright Notice]
+Modifications: [Any modifications made to the component, if applicable]
+
+---
+
+Note: This file should be updated as new dependencies are added to the project.
+For each third-party component, include the component name, license type, copyright notice,
+and a link to the original source or full license text.

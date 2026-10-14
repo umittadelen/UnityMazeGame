@@ -1,6 +1,7 @@
 
 using System.Collections;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 public class WarningScreen : MonoBehaviour
@@ -8,14 +9,23 @@ public class WarningScreen : MonoBehaviour
     [SerializeField] private string menuSceneName = "MenuScene";
 
     private bool switching;
+    private InputAction anyKeyAction;
 
-    private void Start()
+    private void Awake()
     {
+        anyKeyAction = new InputAction(type: InputActionType.Button, binding: "*/<button>");
+        anyKeyAction.Enable();
+    }
+
+    private void OnDestroy()
+    {
+        anyKeyAction.Disable();
+        anyKeyAction.Dispose();
     }
 
     private void Update()
     {
-        if (!switching && Input.anyKeyDown)
+        if (!switching && anyKeyAction.WasPressedThisFrame())
             Continue();
     }
 

@@ -18,7 +18,7 @@ public class MazeCell : MonoBehaviour
     private GameObject _topWall;
 
     [SerializeField]
-    private GameObject _topWallLight; // .5% chance to be active
+    private GameObject _topWallLight;
 
     [SerializeField]
     private GameObject _downWall;

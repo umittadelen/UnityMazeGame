@@ -13,9 +13,6 @@ public class PlayerControls : MonoBehaviour
     public float jumpCooldown;
     public float airMultiplier;
 
-    [Header("Keybinds")]
-    public KeyCode jumpKey = KeyCode.Space;
-
     // Slope handling removed: all surfaces are flat
 
     [Header("Ground Check")]

@@ -725,7 +725,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: bbd5d4f3f0b757241a3f6971f63c1358, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 3472a417c83dd3b4e87c6429b3d5452a, type: 2}
+      objectReference: {fileID: 2100000, guid: 4df0d556556afb6498bdd3b99232ee74, type: 2}
     - target: {fileID: 919132149155446097, guid: bbd5d4f3f0b757241a3f6971f63c1358, type: 3}
       propertyPath: m_Name
       value: Graphics
@@ -795,7 +795,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: bbd5d4f3f0b757241a3f6971f63c1358, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 3472a417c83dd3b4e87c6429b3d5452a, type: 2}
+      objectReference: {fileID: 2100000, guid: 4df0d556556afb6498bdd3b99232ee74, type: 2}
     - target: {fileID: 919132149155446097, guid: bbd5d4f3f0b757241a3f6971f63c1358, type: 3}
       propertyPath: m_Name
       value: Graphics
@@ -892,6 +892,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: afdbbb896338adc45ac975c8537cb873, type: 3}
       insertIndex: -1
       addedObject: {fileID: 7687688413399472918}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: afdbbb896338adc45ac975c8537cb873, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6249312306147783504}
   m_SourcePrefab: {fileID: 100100000, guid: afdbbb896338adc45ac975c8537cb873, type: 3}
 --- !u!4 &1588075281027042649 stripped
 Transform:
@@ -1021,6 +1024,24 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &6249312306147783504
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2108294447623198691}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1bcdde0dfa2809546b3daa942dbc1b65, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::OldFluorescentLightGlowController
+  tubes: []
+  calmTime: {x: 2, y: 14}
+  burnoutChance: 0.01
+  hardOffChance: 0.15
+  dipChance: 0.3
+  humAmount: 0.04
 --- !u!1001 &3943097148845530552
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1072,7 +1093,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: bbd5d4f3f0b757241a3f6971f63c1358, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 3472a417c83dd3b4e87c6429b3d5452a, type: 2}
+      objectReference: {fileID: 2100000, guid: 4df0d556556afb6498bdd3b99232ee74, type: 2}
     - target: {fileID: 919132149155446097, guid: bbd5d4f3f0b757241a3f6971f63c1358, type: 3}
       propertyPath: m_Name
       value: Graphics
@@ -1278,7 +1299,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: bbd5d4f3f0b757241a3f6971f63c1358, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 3472a417c83dd3b4e87c6429b3d5452a, type: 2}
+      objectReference: {fileID: 2100000, guid: 4df0d556556afb6498bdd3b99232ee74, type: 2}
     - target: {fileID: 919132149155446097, guid: bbd5d4f3f0b757241a3f6971f63c1358, type: 3}
       propertyPath: m_Name
       value: Graphics
