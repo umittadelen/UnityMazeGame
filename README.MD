@@ -33,17 +33,42 @@ Download the latest release from the [Releases](https://github.com/umittadelen/U
 
 <h1>🌸 Controls</h1>
 
-| Action | Key |
-|--------|-----|
-| Move Forward | W |
-| Move Backward | S |
-| Move Left | A |
-| Move Right | D |
-| Jump | Space |
-| Look | Mouse |
-| Pointer | Alt |
+<table>
+  <tr>
+    <th>🎮 Action</th>
+    <th>⌨️ Key</th>
+  </tr>
+  <tr>
+    <td>➡️ Move Forward</td>
+    <td><kbd>W</kbd></td>
+  </tr>
+  <tr>
+    <td>⬅️ Move Backward</td>
+    <td><kbd>S</kbd></td>
+  </tr>
+  <tr>
+    <td>⬆️ Move Left</td>
+    <td><kbd>A</kbd></td>
+  </tr>
+  <tr>
+    <td>⬇️ Move Right</td>
+    <td><kbd>D</kbd></td>
+  </tr>
+  <tr>
+    <td>⏫ Jump</td>
+    <td><kbd>Space</kbd></td>
+  </tr>
+  <tr>
+    <td>👁️ Look</td>
+    <td><kbd>Mouse</kbd></td>
+  </tr>
+  <tr>
+    <td>🖱️ Pointer</td>
+    <td><kbd>Alt</kbd></td>
+  </tr>
+</table>
 
-<h1>🌸 License</h1>
+<h1 >🌸 License</h1>
 
 <p align="center">Copyright © 2026 Umit Tadelen. All rights reserved.</p>
 
