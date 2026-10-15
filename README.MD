@@ -1,16 +1,22 @@
-# 🌸 Maze Runner 🌸
+<p align="center">
+    <img src="https://raw.githubusercontent.com/umittadelen/UnityMazeGame/refs/heads/master/Assets/Textures/icon.png" width="150" height="150"/>
+</p>
 
-[![License](https://img.shields.io/badge/🌸%20License-All%20Rights%20Reserved-ff69b4.svg)](LICENSE)
-[![Unity Version](https://img.shields.io/badge/🎮%20Unity-2020%2B-ff69b4.svg)](https://unity.com/)
-[![Platform](https://img.shields.io/badge/🌸%20Platform-Windows%20%7C%20Mac%20%7C%20Linux-ff69b4.svg)]()
+<h1 align="center">🌸 Maze Runner 🌸</h1>
 
+<p align="center">
+  <a href="LICENSE"><img src="https://img.shields.io/badge/🌸%20License-All%20Rights%20Reserved-ff69b4.svg" alt="License"/></a>
+  <a href="https://unity.com/"><img src="https://img.shields.io/badge/🎮%20Unity-2020%2B-ff69b4.svg" alt="Unity Version"/></a>
+  <a href=""><img src="https://img.shields.io/badge/🌸%20Platform-Windows%20%7C%20Mac%20%7C%20Linux-ff69b4.svg" alt="Platform"/></a>
+</p>
+
+<p align="center">
 A 3D maze navigation game built with Unity. Users can set the maze size and navigate to the exit.
+</p>
 
 ## 🌸 Features
 
-- Multiple maze levels
-- Customizable maze size
-- Physics-based movement
+- Customizable maze sizes
 - 3D environments
 
 ## 🌸 Download
