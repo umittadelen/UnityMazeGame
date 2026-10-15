@@ -1,4 +1,3 @@
-
 using System;
 using System.Collections;
 using UnityEngine;
@@ -9,12 +8,13 @@ public class GitHubUpdateChecker : MonoBehaviour
 {
     [Header("UI")]
     [SerializeField] private Button updateButton;
+    [SerializeField] private Button versionCheckFailedButton;
 
     [Header("Settings")]
     [SerializeField] private bool allowPrereleaseVersions = false;
 
-    private const string ReleasesApi =
-        "https://api.github.com/repos/umittadelen/UnityMazeGame/releases";
+    private const string ReleasesApi = "https://api.github.com/repos/umittadelen/UnityMazeGame/releases";
+    private const string ReleasesUrl = "https://github.com/umittadelen/UnityMazeGame/releases";
 
     [Serializable]
     private class ReleaseInfo
@@ -34,6 +34,8 @@ public class GitHubUpdateChecker : MonoBehaviour
     private void Start()
     {
         updateButton.gameObject.SetActive(false);
+        versionCheckFailedButton.gameObject.SetActive(false);
+        versionCheckFailedButton.onClick.AddListener(() => Application.OpenURL(ReleasesUrl));
         StartCoroutine(CheckForUpdates());
     }
 
@@ -51,6 +53,7 @@ public class GitHubUpdateChecker : MonoBehaviour
         if (request.result != UnityWebRequest.Result.Success)
         {
             Debug.LogError($"GitHub API unreachable: {request.error}");
+            versionCheckFailedButton.gameObject.SetActive(true);
             yield break;
         }
 
@@ -63,11 +66,15 @@ public class GitHubUpdateChecker : MonoBehaviour
         catch (Exception e)
         {
             Debug.LogWarning("Could not parse GitHub releases: " + e.Message);
+            versionCheckFailedButton.gameObject.SetActive(true);
             yield break;
         }
 
         if (releaseList?.releases == null || !TryParseVersion(Application.version, out Version currentVersion))
+        {
+            versionCheckFailedButton.gameObject.SetActive(true);
             yield break;
+        }
 
         LogAvailableVersions(releaseList, suffix);
 
@@ -92,6 +99,7 @@ public class GitHubUpdateChecker : MonoBehaviour
         if (newestRelease == null)
         {
             Debug.Log("No compatible releases found for " + suffix);
+            versionCheckFailedButton.gameObject.SetActive(true);
             yield break;
         }
 

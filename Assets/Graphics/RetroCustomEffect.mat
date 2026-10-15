@@ -118,12 +118,16 @@ Material:
     - _BumpScale: 1
     - _ClearCoatMask: 0
     - _ClearCoatSmoothness: 0
+    - _ColorLevels: 16
     - _ColorResolution: 20
     - _Cull: 2
     - _Cutoff: 0.5
+    - _DarkCutoff: 20
+    - _Darkness: 1.008
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
     - _DitherSpread: 0.1
+    - _DitherStrength: 1
     - _DstBlend: 0
     - _DstBlendAlpha: 0
     - _EnvironmentReflections: 1
@@ -132,6 +136,7 @@ Material:
     - _GlossyReflections: 0
     - _Metallic: 0
     - _NoiseScale: 1
+    - _NoiseSpeed: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.005
     - _QueueOffset: 0
@@ -145,6 +150,7 @@ Material:
     - _SrcBlendAlpha: 1
     - _Surface: 0
     - _Threshold: 0.5
+    - _UseTimeFallback: 1
     - _WorkflowMode: 1
     - _XRMotionVectorsPass: 1
     - _ZWrite: 1
