@@ -14,12 +14,16 @@
 A 3D maze navigation game built with Unity. Users can set the maze size and navigate to the exit.
 </p>
 
-## 🌸 Features
+<p align="center">
+  <img src="https://raw.githubusercontent.com/umittadelen/UnityMazeGame/refs/heads/master/github/MainUI.png" width="925" alt="Maze Runner Gameplay"/>
+</p>
+
+<h1>🌸 Features</h1>
 
 - Customizable maze sizes
 - 3D environments
 
-## 🌸 Download
+<h1>🌸 Download</h1>
 
 Download the latest release from the [Releases](https://github.com/umittadelen/UnityMazeGame/releases) tab.
 
@@ -27,7 +31,7 @@ Download the latest release from the [Releases](https://github.com/umittadelen/U
 2. Extract it
 3. Run `MazeRunner.exe`
 
-## 🌸 Controls
+<h1>🌸 Controls</h1>
 
 | Action | Key |
 |--------|-----|
@@ -39,7 +43,7 @@ Download the latest release from the [Releases](https://github.com/umittadelen/U
 | Look | Mouse |
 | Pointer | Alt |
 
-## 🌸 License
+<h1>🌸 License</h1>
 
 <p align="center">Copyright © 2026 Umit Tadelen. All rights reserved.</p>
 
