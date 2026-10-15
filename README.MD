@@ -19,7 +19,7 @@ Download the latest release from the [Releases](https://github.com/umittadelen/U
 
 1. Download the `.7z` file
 2. Extract it
-3. Run `MazeRunner-V#.#.#.exe` *(might vary depending on the version)*
+3. Run `MazeRunner.exe`
 
 ## 🌸 Controls
 
