@@ -763,7 +763,6 @@ GameObject:
   - component: {fileID: 120591084}
   - component: {fileID: 120591083}
   - component: {fileID: 120591088}
-  - component: {fileID: 120591089}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -793,7 +792,6 @@ MonoBehaviour:
   _seedInput: {fileID: 1445368899}
   _chunkSizeInput: {fileID: 1394042251}
   _renderDistInput: {fileID: 387502464}
-  _gameSceneName: GameScene
 --- !u!114 &120591084
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -897,32 +895,6 @@ MonoBehaviour:
   updateButton: {fileID: 1165152350}
   versionCheckFailedButton: {fileID: 1712269147}
   allowPrereleaseVersions: 1
---- !u!114 &120591089
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 120591082}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7eb6e4b935256e94486f2c52b11429a6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ButtonSoundHandler
-  _hoverSound: {fileID: 8300000, guid: be98eba1d4c1fae4795b6b3aca731a8b, type: 3}
-  _clickSound: {fileID: 8300000, guid: 7dae010ba52c024408fc975b8d32899c, type: 3}
-  _sfxVolume: 1
-  _buttons:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
 --- !u!224 &159920264 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5908208990826749060, guid: 9528fb14b68705742b841065a9bd7938, type: 3}
