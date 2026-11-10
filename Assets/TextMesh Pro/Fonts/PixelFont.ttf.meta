@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 05c67cadc25c8254589d5d904be96d3a
+guid: 2c5cb875bb308f045b5fdfcbe21634b0
 TrueTypeFontImporter:
   externalObjects: {}
   serializedVersion: 4
@@ -9,10 +9,10 @@ TrueTypeFontImporter:
   characterPadding: 1
   includeFontData: 1
   fontNames:
-  - LCD Solid
+  - MarlinISO5x7BasicTR
   fallbackFontReferences: []
   customCharacters: 
-  fontRenderingMode: 0
+  fontRenderingMode: 2
   ascentCalculationMode: 1
   useLegacyBoundsCalculation: 0
   shouldRoundAdvanceValue: 1
