@@ -793,6 +793,7 @@ MonoBehaviour:
   _seedInput: {fileID: 1445368899}
   _chunkSizeInput: {fileID: 1394042251}
   _renderDistInput: {fileID: 387502464}
+  _gameSceneName: GameScene
 --- !u!114 &120591084
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2039,56 +2040,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.RectMask2D
   m_Padding: {x: -8, y: -5, z: -8, w: -5}
   m_Softness: {x: 0, y: 0}
---- !u!1 &405099622
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 405099624}
-  - component: {fileID: 405099623}
-  m_Layer: 0
-  m_Name: GameManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &405099623
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 405099622}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 46624ff31a3d84841a84fbc98e10d3ec, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::MazeGameManager
-  MazeWidth: 30
-  MazeHeight: 30
-  MazeDepth: 30
-  Seed: -1
-  ChunkSize: 5
-  RenderDistance: 1
---- !u!4 &405099624
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 405099622}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 561.0132, y: 269.1946, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &411997981
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2328,7 +2279,7 @@ MonoBehaviour:
   m_CaretColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
   m_CustomCaretColor: 0
   m_SelectionColor: {r: 0.65882355, g: 0.32156864, b: 0.10980392, a: 1}
-  m_Text: 10
+  m_Text: 3
   m_CaretBlinkRate: 0.85
   m_CaretWidth: 1
   m_ReadOnly: 0
@@ -3781,7 +3732,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "10\u200B"
+  m_text: "3\u200B"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e0b3f92a9c25a534692cf8dedc82976f, type: 2}
   m_sharedMaterial: {fileID: 8105852469614717044, guid: e0b3f92a9c25a534692cf8dedc82976f, type: 2}
@@ -5085,7 +5036,7 @@ MonoBehaviour:
   m_CaretColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
   m_CustomCaretColor: 0
   m_SelectionColor: {r: 0.65882355, g: 0.32156864, b: 0.10980392, a: 1}
-  m_Text: 10
+  m_Text: 3
   m_CaretBlinkRate: 0.85
   m_CaretWidth: 1
   m_ReadOnly: 0
@@ -6140,7 +6091,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "10\u200B"
+  m_text: "3\u200B"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e0b3f92a9c25a534692cf8dedc82976f, type: 2}
   m_sharedMaterial: {fileID: 8105852469614717044, guid: e0b3f92a9c25a534692cf8dedc82976f, type: 2}
@@ -8693,7 +8644,7 @@ MonoBehaviour:
   m_CaretColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
   m_CustomCaretColor: 0
   m_SelectionColor: {r: 0.65882355, g: 0.32156864, b: 0.10980392, a: 1}
-  m_Text: 10
+  m_Text: 3
   m_CaretBlinkRate: 0.85
   m_CaretWidth: 1
   m_ReadOnly: 0
@@ -8912,7 +8863,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "10\u200B"
+  m_text: "3\u200B"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e0b3f92a9c25a534692cf8dedc82976f, type: 2}
   m_sharedMaterial: {fileID: 8105852469614717044, guid: e0b3f92a9c25a534692cf8dedc82976f, type: 2}
@@ -9683,7 +9634,6 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 834378697}
-  - {fileID: 405099624}
   - {fileID: 2140142879}
   - {fileID: 1819252624}
   - {fileID: 914100460}

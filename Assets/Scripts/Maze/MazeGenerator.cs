@@ -20,24 +20,13 @@ public class MazeGenerator : MonoBehaviour
     [SerializeField] private int _seed = -1;
     private int _usedSeed;
 
-    private void Awake()
+    // Called by MazeChunkManager with the session config (same on every machine).
+    public void Configure(MatchConfig config)
     {
-        // Check if the Manager exists (it survived from the Menu Scene)
-        if (MazeGameManager.Instance != null)
-        {
-            _mazeWidth = MazeGameManager.Instance.MazeWidth;
-            _mazeHeight = MazeGameManager.Instance.MazeHeight;
-            _mazeDepth = MazeGameManager.Instance.MazeDepth;
-            _seed = MazeGameManager.Instance.Seed;
-            
-            Debug.Log($"Loaded settings from Manager: {_mazeWidth}x{_mazeHeight}x{_mazeDepth}");
-        }
-    }
-
-    // --- Getters ---
-    public int GetUsedSeed()
-    {
-        return _usedSeed;
+        _mazeWidth = config.Width;
+        _mazeHeight = config.Height;
+        _mazeDepth = config.Depth;
+        _seed = config.Seed;
     }
 
     public float CellSizeX => cellSizeX;
@@ -65,10 +54,7 @@ public class MazeGenerator : MonoBehaviour
     public void InitializeAndGenerate()
     {
         // 1. Setup Seed
-        if (_seed == -1)
-            _usedSeed = System.DateTime.Now.ToString().GetHashCode();
-        else
-            _usedSeed = _seed;
+        _usedSeed = _seed == -1 ? MatchConfig.NewSeed() : _seed;
 
         Random.InitState(_usedSeed);
         Debug.Log($"Generating Maze Data for {_mazeWidth}x{_mazeHeight}x{_mazeDepth} (Seed: {_usedSeed})...");
@@ -185,7 +171,7 @@ public class MazeGenerator : MonoBehaviour
         if (!isRightBoundary && !data.WallRight) cell.ClearRightWall();
         if (!isFrontBoundary && !data.WallFront) cell.ClearFrontWall();
         if (!data.WallUp){cell.ClearTopWall();}
-        else{cell.InitializeTopWall();}
+        else{cell.InitializeTopWall(CellRoll(x, y, z));}
 
         if (x == _furthestCellPos.x && y == _furthestCellPos.y && z == _furthestCellPos.z)
             cell.ActivateEndBlock();
@@ -194,6 +180,22 @@ public class MazeGenerator : MonoBehaviour
     }
 
     // --- Helpers ---
+
+    // Deterministic 0..1 per cell from seed + position (same everywhere, same every chunk reload).
+    private float CellRoll(int x, int y, int z)
+    {
+        unchecked
+        {
+            uint h = (uint)_usedSeed;
+            h ^= (uint)x * 0x8DA6B343u;
+            h ^= (uint)y * 0xD8163841u;
+            h ^= (uint)z * 0xCB1AB31Fu;
+            h ^= h >> 16; h *= 0x7FEB352Du;
+            h ^= h >> 15; h *= 0x846CA68Bu;
+            h ^= h >> 16;
+            return (h & 0xFFFFFF) / 16777216f;
+        }
+    }
 
     private Vector3Int? HuntForNewCellData(ref int startIndex, int totalCells)
     {

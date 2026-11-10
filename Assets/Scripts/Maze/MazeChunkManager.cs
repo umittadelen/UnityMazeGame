@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,163 +7,107 @@ public class MazeChunkManager : MonoBehaviour
     [SerializeField] private MazeGenerator _mazeGenerator;
     [SerializeField] private Transform _player;
 
-    [Header("Chunk Settings")]
-    [Tooltip("Size of a chunk in cells (e.g. 5 = 5x5x5 cells)")]
-    [SerializeField] private int _chunkSize = 5;
-    
-    [Tooltip("Radius of chunks to render around player (1 = 3x3x3 chunks, 2 = 5x5x5 chunks)")]
-    [SerializeField] private int _renderDistance = 1;
+    private int _chunkSize;
+    private int _renderDistance;
 
-    // Track instantiated chunks: Key = Chunk Coordinate (not world pos), Value = Container Object
-    private Dictionary<Vector3Int, GameObject> _activeChunks = new Dictionary<Vector3Int, GameObject>();
-    
-    private Vector3Int _lastPlayerChunkCoord = new Vector3Int(-999, -999, -999);
+    private readonly Dictionary<Vector3Int, GameObject> _activeChunks = new Dictionary<Vector3Int, GameObject>();
+    private readonly HashSet<Vector3Int> _keep = new HashSet<Vector3Int>();
+    private readonly List<Vector3Int> _remove = new List<Vector3Int>();
+    private Vector3Int _lastPlayerChunkCoord;
 
-    void Awake()
+    private void Start()
     {
-        if (MazeGameManager.Instance != null)
-        {
-            _chunkSize = MazeGameManager.Instance.ChunkSize;
-            _renderDistance = MazeGameManager.Instance.RenderDistance;
-        }
-    }
+        _chunkSize = LocalSettings.ChunkSize;
+        _renderDistance = LocalSettings.RenderDistance;
 
-    void Start()
-    {
-        // 2. Locate Generator if missing
         if (_mazeGenerator == null) _mazeGenerator = Object.FindAnyObjectByType<MazeGenerator>();
-        
-        // 3. Generate the math/data for the whole maze
-        // The Generator will use the settings we injected in its Awake()
-        _mazeGenerator.InitializeAndGenerate();
-        
-        // 4. Initial Chunk Update
-        // Ensure player is assigned, or find it by tag
-        if (_player == null) 
+        if (_player == null)
         {
             GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
             if (playerObj != null) _player = playerObj.transform;
         }
 
+        if (GameSession.HasConfig) _mazeGenerator.Configure(GameSession.Config);
+        _mazeGenerator.InitializeAndGenerate();
+
         if (_player != null)
         {
-             UpdateChunks();
-        }
-    }
-
-    void Update()
-    {
-        if (!_mazeGenerator.IsGenerationComplete || _player == null) return;
-
-        Vector3Int currentChunk = GetChunkCoordinate(_player.position);
-
-        // Only update if player crossed into a new chunk
-        if (currentChunk != _lastPlayerChunkCoord)
-        {
-            _lastPlayerChunkCoord = currentChunk;
+            _lastPlayerChunkCoord = GetChunkCoordinate(_player.position);
             UpdateChunks();
         }
     }
 
+    private void Update()
+    {
+        if (_player == null || !_mazeGenerator.IsGenerationComplete) return;
+
+        Vector3Int current = GetChunkCoordinate(_player.position);
+        if (current == _lastPlayerChunkCoord) return;
+
+        _lastPlayerChunkCoord = current;
+        UpdateChunks();
+    }
+
     private void UpdateChunks()
     {
-        List<Vector3Int> chunksToKeep = new List<Vector3Int>();
+        _keep.Clear();
 
-        // 1. Determine which chunks should be visible
         for (int x = -_renderDistance; x <= _renderDistance; x++)
+        for (int y = -_renderDistance; y <= _renderDistance; y++)
+        for (int z = -_renderDistance; z <= _renderDistance; z++)
         {
-            for (int y = -_renderDistance; y <= _renderDistance; y++)
-            {
-                for (int z = -_renderDistance; z <= _renderDistance; z++)
-                {
-                    Vector3Int chunkCoord = _lastPlayerChunkCoord + new Vector3Int(x, y, z);
-                    
-                    // Check if this chunk is actually inside the maze boundaries
-                    if (IsChunkValid(chunkCoord))
-                    {
-                        chunksToKeep.Add(chunkCoord);
-                        
-                        if (!_activeChunks.ContainsKey(chunkCoord))
-                        {
-                            CreateChunk(chunkCoord);
-                        }
-                    }
-                }
-            }
+            Vector3Int coord = _lastPlayerChunkCoord + new Vector3Int(x, y, z);
+            if (!IsChunkValid(coord)) continue;
+
+            _keep.Add(coord);
+            if (!_activeChunks.ContainsKey(coord)) CreateChunk(coord);
         }
 
-        // 2. Remove chunks that are far away
-        // We use a separate list to avoid modifying the dictionary while iterating
-        List<Vector3Int> chunksToRemove = new List<Vector3Int>();
+        _remove.Clear();
         foreach (var kvp in _activeChunks)
-        {
-            if (!chunksToKeep.Contains(kvp.Key))
-            {
-                chunksToRemove.Add(kvp.Key);
-            }
-        }
+            if (!_keep.Contains(kvp.Key)) _remove.Add(kvp.Key);
 
-        foreach (var coord in chunksToRemove)
+        foreach (var coord in _remove)
         {
             Destroy(_activeChunks[coord]);
             _activeChunks.Remove(coord);
         }
-        
-        Debug.Log($"Active Chunks: {_activeChunks.Count}");
     }
 
     private void CreateChunk(Vector3Int chunkCoord)
     {
-        GameObject chunkContainer = new GameObject($"Chunk_{chunkCoord.x}_{chunkCoord.y}_{chunkCoord.z}");
-        chunkContainer.transform.parent = this.transform;
-        
-        // Calculate start and end indices for cells in this chunk
+        var container = new GameObject($"Chunk_{chunkCoord.x}_{chunkCoord.y}_{chunkCoord.z}");
+        container.transform.parent = transform;
+
         int startX = chunkCoord.x * _chunkSize;
         int startY = chunkCoord.y * _chunkSize;
         int startZ = chunkCoord.z * _chunkSize;
 
-        // Loop through the 5x5x5 area (or whatever chunkSize is)
         for (int x = 0; x < _chunkSize; x++)
-        {
-            for (int y = 0; y < _chunkSize; y++)
-            {
-                for (int z = 0; z < _chunkSize; z++)
-                {
-                    int gridX = startX + x;
-                    int gridY = startY + y;
-                    int gridZ = startZ + z;
+        for (int y = 0; y < _chunkSize; y++)
+        for (int z = 0; z < _chunkSize; z++)
+            _mazeGenerator.InstantiateCellAt(startX + x, startY + y, startZ + z, container.transform);
 
-                    // Ask Generator to spawn the cell
-                    _mazeGenerator.InstantiateCellAt(gridX, gridY, gridZ, chunkContainer.transform);
-                }
-            }
-        }
-
-        _activeChunks.Add(chunkCoord, chunkContainer);
+        _activeChunks.Add(chunkCoord, container);
     }
 
     private Vector3Int GetChunkCoordinate(Vector3 position)
     {
-        float realChunkSizeX = _chunkSize * _mazeGenerator.CellSizeX;
-        float realChunkSizeY = _chunkSize * _mazeGenerator.CellSizeY;
-        float realChunkSizeZ = _chunkSize * _mazeGenerator.CellSizeZ;
-        
         return new Vector3Int(
-            Mathf.FloorToInt(position.x / realChunkSizeX),
-            Mathf.FloorToInt(position.y / realChunkSizeY),
-            Mathf.FloorToInt(position.z / realChunkSizeZ)
+            Mathf.FloorToInt(position.x / (_chunkSize * _mazeGenerator.CellSizeX)),
+            Mathf.FloorToInt(position.y / (_chunkSize * _mazeGenerator.CellSizeY)),
+            Mathf.FloorToInt(position.z / (_chunkSize * _mazeGenerator.CellSizeZ))
         );
     }
 
-    private bool IsChunkValid(Vector3Int chunkCoord)
+    private bool IsChunkValid(Vector3Int c)
     {
-        // Calculate the maximum possible chunk coordinate
-        int maxChunkX = Mathf.CeilToInt((float)_mazeGenerator._mazeWidth / _chunkSize);
-        int maxChunkY = Mathf.CeilToInt((float)_mazeGenerator._mazeHeight / _chunkSize);
-        int maxChunkZ = Mathf.CeilToInt((float)_mazeGenerator._mazeDepth / _chunkSize);
+        int maxX = Mathf.CeilToInt((float)_mazeGenerator._mazeWidth / _chunkSize);
+        int maxY = Mathf.CeilToInt((float)_mazeGenerator._mazeHeight / _chunkSize);
+        int maxZ = Mathf.CeilToInt((float)_mazeGenerator._mazeDepth / _chunkSize);
 
-        return chunkCoord.x >= 0 && chunkCoord.x < maxChunkX &&
-               chunkCoord.y >= 0 && chunkCoord.y < maxChunkY &&
-               chunkCoord.z >= 0 && chunkCoord.z < maxChunkZ;
+        return c.x >= 0 && c.x < maxX &&
+               c.y >= 0 && c.y < maxY &&
+               c.z >= 0 && c.z < maxZ;
     }
 }

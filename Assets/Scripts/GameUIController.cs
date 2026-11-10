@@ -1,8 +1,8 @@
+using System.Collections;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 using TMPro;
-using System.Collections; // Required for Coroutines
 
 public class GameUIController : MonoBehaviour
 {
@@ -15,36 +15,29 @@ public class GameUIController : MonoBehaviour
 
     [SerializeField] private AudioClip _winSound;
 
-    private bool _isPaused = false;
-    private int _currentSeed;
-    private bool _gameEnded = false;
+    private bool _isPaused;
+    private bool _gameEnded;
+
+    private int Seed => GameSession.Config.Seed;
 
     private void Awake()
     {
-        if (Instance != null && Instance != this)
-        {
-            Destroy(gameObject);
-        }
-        else
-        {
-            Instance = this;
-        }
+        if (Instance != null && Instance != this) { Destroy(gameObject); return; }
+        Instance = this;
     }
 
-    void Start()
+    private void Start()
     {
         Time.timeScale = 1f;
-
         if (_pausePanelDialog) _pausePanelDialog.SetActive(false);
-        LockCursor();
-
-        // Get the seed immediately
-        UpdateSeedDisplay();
+        if (_endGamePanelDialog) _endGamePanelDialog.SetActive(false);
+        SetCursorLocked(true);
+        if (_seedDisplayText != null) _seedDisplayText.text = $"Seed: {Seed}";
     }
 
-    void Update()
+    private void Update()
     {
-        if (_gameEnded || Keyboard.current == null) return;
+        if (_gameEnded || SceneLoader.IsLoading || Keyboard.current == null) return;
         if (Keyboard.current.escapeKey.wasPressedThisFrame)
         {
             if (_isPaused) ResumeGame();
@@ -52,54 +45,25 @@ public class GameUIController : MonoBehaviour
         }
     }
 
-    private void UpdateSeedDisplay()
-    {
-        // Find the generator to get the REAL seed
-        MazeGenerator generator = Object.FindFirstObjectByType<MazeGenerator>();
-        
-        if (generator != null)
-        {
-            _currentSeed = generator.GetUsedSeed();
-            if (_seedDisplayText != null)
-                _seedDisplayText.text = $"Seed: {_currentSeed}";
-        }
-    }
-
-    // --- NEW: COPY FUNCTION ---
     public void CopySeedToClipboard()
     {
-        // 1. Copy to System Clipboard
-        GUIUtility.systemCopyBuffer = _currentSeed.ToString();
-        
-        // 2. Show Visual Feedback
-        if (_seedDisplayText != null)
-        {
-            StartCoroutine(ShowCopiedFeedback());
-        }
-        
-        Debug.Log($"Copied seed to clipboard: {_currentSeed}");
+        GUIUtility.systemCopyBuffer = Seed.ToString();
+        if (_seedDisplayText != null) StartCoroutine(ShowCopiedFeedback());
     }
 
     private IEnumerator ShowCopiedFeedback()
     {
-        // Change text to "Copied!"
         _seedDisplayText.text = "Copied!";
-        
-        // Wait for 1 second (ignoring time scale so it works while paused!)
         yield return new WaitForSecondsRealtime(1f);
-        
-        // Change back to original text
-        _seedDisplayText.text = $"Seed: {_currentSeed}";
+        _seedDisplayText.text = $"Seed: {Seed}";
     }
-
-    // --- STANDARD BUTTONS ---
 
     public void ResumeGame()
     {
         _isPaused = false;
         _pausePanelDialog.SetActive(false);
         Time.timeScale = 1f;
-        LockCursor();
+        SetCursorLocked(true);
     }
 
     public void PauseGame()
@@ -107,56 +71,37 @@ public class GameUIController : MonoBehaviour
         _isPaused = true;
         _pausePanelDialog.SetActive(true);
         Time.timeScale = 0f;
-        UnlockCursor();
+        SetCursorLocked(false);
     }
 
-    public void ExitToMainMenu()
+    public void ExitToMainMenu() => SceneLoader.Load("MenuScene");
+
+    public void RestartGame()
     {
-        Time.timeScale = 1f;
-        SceneManager.LoadScene("MenuScene"); 
+        if (SceneLoader.IsLoading) return;
+        GameSession.Reroll();
+        SceneLoader.Load(SceneManager.GetActiveScene().name);
     }
 
-    private void LockCursor()
-    {
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
-    }
-
-    private void UnlockCursor()
-    {
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
-    }
-
-    // --- 3. NEW: GAME WON LOGIC ---
     public void GameWon()
     {
-        if (_gameEnded) return; // Don't trigger twice
+        if (_gameEnded) return;
         _gameEnded = true;
 
-        // Play win sound
-        if (_winSound != null)
-        {
+        if (_winSound != null && Camera.main != null)
             AudioSource.PlayClipAtPoint(_winSound, Camera.main.transform.position);
-        }
-
-        Debug.Log("Game Won! Showing UI.");
 
         if (_endGamePanelDialog != null)
         {
             _endGamePanelDialog.SetActive(true);
-            
-            // Stop the game
             Time.timeScale = 0f;
-            
-            // Show Mouse
-            UnlockCursor();
+            SetCursorLocked(false);
         }
     }
 
-    public void RestartGame()
+    private void SetCursorLocked(bool locked)
     {
-        Time.timeScale = 1f;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        Cursor.lockState = locked ? CursorLockMode.Locked : CursorLockMode.None;
+        Cursor.visible = !locked;
     }
 }

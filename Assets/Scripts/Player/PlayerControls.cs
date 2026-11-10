@@ -1,19 +1,13 @@
 using UnityEngine;
-
 using UnityEngine.InputSystem;
 
 public class PlayerControls : MonoBehaviour
 {
     [Header("Movement")]
     public float moveSpeed;
-
     public float groundDrag;
-
     public float jumpForce;
-    public float jumpCooldown;
     public float airMultiplier;
-
-    // Slope handling removed: all surfaces are flat
 
     [Header("Ground Check")]
     public float playerHeight;
@@ -22,12 +16,8 @@ public class PlayerControls : MonoBehaviour
 
     public Transform orientation;
 
-
-    float horizontalInput;
-    float verticalInput;
-    Vector2 moveInput;
-    Vector3 moveDirection;
-    Rigidbody rb;
+    private Vector2 moveInput;
+    private Rigidbody rb;
 
     private PlayerInputActions inputActions;
     private bool jumpPressed;
@@ -36,12 +26,12 @@ public class PlayerControls : MonoBehaviour
     {
         inputActions = new PlayerInputActions();
         inputActions.Player.Enable();
-        inputActions.Player.Jump.performed += ctx => jumpPressed = true;
+        inputActions.Player.Jump.performed += OnJump;
     }
 
     private void OnDestroy()
     {
-        inputActions.Player.Jump.performed -= ctx => jumpPressed = true;
+        inputActions.Player.Jump.performed -= OnJump;
         inputActions.Dispose();
     }
 
@@ -49,23 +39,23 @@ public class PlayerControls : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
-        // Slope handling removed
+    }
+
+    private void OnJump(InputAction.CallbackContext ctx)
+    {
+        jumpPressed = true;
     }
 
     private void Update()
     {
         if (Time.timeScale == 0) return;
 
-        // ground check
         grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.3f, whatIsGround);
 
-        MyInput();
+        moveInput = inputActions.Player.Move.ReadValue<Vector2>();
         SpeedControl();
 
-        if (grounded)
-            rb.linearDamping = groundDrag;
-        else
-            rb.linearDamping = 0;
+        rb.linearDamping = grounded ? groundDrag : 0f;
 
         if (grounded && moveInput == Vector2.zero)
         {
@@ -86,20 +76,11 @@ public class PlayerControls : MonoBehaviour
         MovePlayer();
     }
 
-    private void MyInput()
-    {
-        moveInput = inputActions.Player.Move.ReadValue<Vector2>();
-        horizontalInput = moveInput.x;
-        verticalInput = moveInput.y;
-    }
-
     private void MovePlayer()
     {
-        moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
-        if (grounded)
-            rb.AddForce(moveDirection.normalized * moveSpeed * 10f, ForceMode.Force);
-        else
-            rb.AddForce(moveDirection.normalized * moveSpeed * 10f * airMultiplier, ForceMode.Force);
+        Vector3 moveDirection = orientation.forward * moveInput.y + orientation.right * moveInput.x;
+        float mult = grounded ? 1f : airMultiplier;
+        rb.AddForce(moveDirection.normalized * moveSpeed * 10f * mult, ForceMode.Force);
         rb.useGravity = true;
     }
 
@@ -116,15 +97,8 @@ public class PlayerControls : MonoBehaviour
     private void Jump()
     {
         Vector3 vel = rb.linearVelocity;
-
-        // Only reset downward velocity
-        if (vel.y < 0f)
-            vel.y = 0f;
-
+        if (vel.y < 0f) vel.y = 0f;
         rb.linearVelocity = vel;
-
         rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
     }
-
-    // Slope-related methods removed: OnSlope, GetSlopeMoveDirection
 }

@@ -29,13 +29,8 @@ public class MazeCell : MonoBehaviour
     [SerializeField]
     private GameObject _endBlock;
 
-    public int cellDist = 0;
-
-    public bool IsVisited { get; private set; }
-
     public void Visit()
     {
-        IsVisited = true;
         _unvisitedBlock.SetActive(false);
         _endBlock.SetActive(false);
     }
@@ -60,10 +55,10 @@ public class MazeCell : MonoBehaviour
         _backWall.SetActive(false);
     }
 
-    public void InitializeTopWall()
+    // roll in [0,1): pass a deterministic value so lights match on every client and when chunks reload
+    public void InitializeTopWall(float roll)
     {
-        float randomValue = Random.value;
-        if (randomValue < 0.05f) // 5% chance
+        if (roll < 0.05f) // 5% chance
         {
             _topWall.SetActive(false);
             _topWallLight.SetActive(true);
