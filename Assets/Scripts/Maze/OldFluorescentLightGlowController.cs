@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class OldFluorescentLightGlowController : MonoBehaviour
@@ -35,6 +36,11 @@ public class OldFluorescentLightGlowController : MonoBehaviour
 
     static readonly int EmissionID = Shader.PropertyToID("_EmissionColor");
 
+    public static readonly List<OldFluorescentLightGlowController> Active = new List<OldFluorescentLightGlowController>();
+
+    // average tube brightness this frame, 0..1
+    public float Brightness { get; private set; } = 1f;
+
     void Awake()
     {
         foreach (var t in tubes)
@@ -50,6 +56,7 @@ public class OldFluorescentLightGlowController : MonoBehaviour
 
     void OnEnable()
     {
+        Active.Add(this);
         foreach (var t in tubes)
         {
             if (t.renderer == null) continue;
@@ -59,14 +66,24 @@ public class OldFluorescentLightGlowController : MonoBehaviour
         }
     }
 
+    void OnDisable()
+    {
+        Active.Remove(this);
+    }
+
     void Update()
     {
+        float sum = 0f;
+        int count = 0;
+
         foreach (var t in tubes)
         {
             if (t.renderer == null) continue;
 
             float v = t.dead ? 0f :
                 t.level * (1f - humAmount * Mathf.PerlinNoise(Time.time * 25f, t.seed));
+            sum += v;
+            count++;
 
             t.renderer.GetPropertyBlock(t.block, t.materialIndex);
             t.block.SetColor(EmissionID, t.baseEmission * v);
@@ -74,6 +91,8 @@ public class OldFluorescentLightGlowController : MonoBehaviour
 
             if (t.tubeLight) t.tubeLight.intensity = t.baseLight * v;
         }
+
+        Brightness = count > 0 ? sum / count : 1f;
     }
 
     IEnumerator TubeRoutine(Tube t)
@@ -134,4 +153,4 @@ public class OldFluorescentLightGlowController : MonoBehaviour
             yield return null;
         }
     }
-}
+}

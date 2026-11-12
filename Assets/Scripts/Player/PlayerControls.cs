@@ -25,9 +25,11 @@ public class PlayerControls : MonoBehaviour
     private void Awake()
     {
         inputActions = new PlayerInputActions();
-        inputActions.Player.Enable();
         inputActions.Player.Jump.performed += OnJump;
     }
+
+    private void OnEnable() => inputActions.Player.Enable();
+    private void OnDisable() => inputActions.Player.Disable();
 
     private void OnDestroy()
     {

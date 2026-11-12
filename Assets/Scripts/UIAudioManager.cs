@@ -18,7 +18,6 @@ public class UIAudioManager : MonoBehaviour
         }
 
         Instance = this;
-        DontDestroyOnLoad(gameObject);
     }
 
     public void PlayHover()

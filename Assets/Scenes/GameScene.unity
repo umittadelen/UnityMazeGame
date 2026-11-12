@@ -960,6 +960,7 @@ GameObject:
   m_Component:
   - component: {fileID: 832575519}
   - component: {fileID: 832575518}
+  - component: {fileID: 832575520}
   m_Layer: 0
   m_Name: Global Volume
   m_TagString: Untagged
@@ -999,6 +1000,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &832575520
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 832575517}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55735d79918ba604ca1650cac2ff3993, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LightAnomalyEffect
+  _range: 3.5
+  _strength: 1
 --- !u!1 &923820798
 GameObject:
   m_ObjectHideFlags: 0
@@ -1037,7 +1052,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 1474441182, guid: f2ee5c938f21f7949ae09d1c0bad8dde, type: 3}
+  m_Sprite: {fileID: 1516666812, guid: 8ee7cb0f58234a74fafbd605ff8c480b, type: 3}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1479,14 +1494,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7eb6e4b935256e94486f2c52b11429a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ButtonSoundHandler
-  _hoverSound: {fileID: 8300000, guid: be98eba1d4c1fae4795b6b3aca731a8b, type: 3}
-  _clickSound: {fileID: 8300000, guid: 7dae010ba52c024408fc975b8d32899c, type: 3}
-  _sfxVolume: 1
-  _buttons:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
 --- !u!1 &1111031694
 GameObject:
   m_ObjectHideFlags: 0
@@ -1549,7 +1556,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 1516892456, guid: 518c431eb5fa002429bf7b74d8aab563, type: 3}
+  m_Sprite: {fileID: -1266865951, guid: 8ee7cb0f58234a74fafbd605ff8c480b, type: 3}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1

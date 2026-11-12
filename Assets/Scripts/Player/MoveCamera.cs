@@ -1,3 +1,4 @@
+
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -20,14 +21,16 @@ public class MouseLook : MonoBehaviour
     private InputAction altAction;
 
 
-    private void OnEnable()
+    private void Awake()
     {
         lookAction = new InputAction(type: InputActionType.Value, binding: "<Mouse>/delta");
-        lookAction.Enable();
-
         altAction = new InputAction(type: InputActionType.Button, binding: "<Keyboard>/leftAlt");
-        altAction.Enable();
+    }
 
+    private void OnEnable()
+    {
+        lookAction.Enable();
+        altAction.Enable();
         LockCursor(true);
     }
 
@@ -35,6 +38,12 @@ public class MouseLook : MonoBehaviour
     {
         lookAction.Disable();
         altAction.Disable();
+    }
+
+    private void OnDestroy()
+    {
+        lookAction.Dispose();
+        altAction.Dispose();
     }
 
     void Update()
