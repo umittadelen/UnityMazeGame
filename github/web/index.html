@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+
+<html lang="tr">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+        <meta name="description" content="Unity ile geliştirilmiş MazeRunner projesinin sunumu.">
+	    <meta name="author" content="Umit Tasdelen">
+
+        <title>MazeRunner - Proje Sunumu</title>
+
+        <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+
+        <link rel="shortcut icon" href="./favicon.png">
+        <link rel="apple-touch-icon" href="./apple-touch-icon.png">
+
+        <link rel="stylesheet" href="css/presentation.css">
+
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets@11.11.1/styles/github-dark.min.css">
+    </head>
+    <body style="height: 100%; overflow: hidden;">
+        <div class="fallback-message">
+			<p>Your browser <b>doesn't support the features required</b> by impress.js.</p>
+			<p>For the best experience please use the latest <b>Chrome</b>, <b>Safari</b> or <b>Firefox</b> browser.</p>
+		</div>
+
+        <main id="impress">
+
+            <section class="step" data-x="0" data-y="0" data-scale="5" data-rotate-z="90" data-transition-duration="800">
+                <h1 class="g">MazeRunner</h1>
+                <p>Onemli olan bir labirentin içinde kaybolmak değil, <span class="o">onu cozmektir.</span></p>
+                <small class="dim">Umit Tasdelen · Unity 6 · C# · URP</small>
+            </section>
+
+            <section class="step" data-x="5000" data-y="2000" data-scale="2" data-rotate="10" data-transition-duration="800">
+                <p>Oyuncu bir labirente bırakılıyor.<br>Tek hedefi var: <span class="o">çıkışı en kısa sürede bulmak.</span></p>
+                <br><br>
+                <small class="dim">İlham: Backrooms</small>
+            </section>
+
+            <section class="step" data-x="5000" data-y="8000" data-scale="1" data-rotate="90" data-transition-duration="800">
+                <h1>
+                    <span class="y">· keşfet.</span><br>
+                    <span class="o">· yönünü bul.</span><br>
+                    <span class="p">· karar ver.</span>
+                </h1>
+            </section>
+
+            <section class="step" data-x="7000" data-y="10000" data-scale="2" data-rotate="90" data-rotate-x="90" data-rotate-y="90" data-rotate-z="100" data-transition-duration="800">
+                <!-- Enough yapping here is the actual Fikir açıklaması (fikir nereden geldi ve neler bana ilham verdi) -->
+                <p>Bu proje, labirent çözme deneyimini oyuncuya sunmayı amaçlıyor. İlham kaynağım, özellikle <span class="p">Backrooms</span> gibi korku odaklı oyunlar oldu.</p>
+                <p>Oyuncunun labirentte kaybolma ve çıkışı bulma süreci, oyun tasarımında önemli bir yer tutuyor.</p>
+            </section>
+
+            <section class="step" data-x="8000" data-y="12000" data-scale="1" data-rotate-x="90" data-rotate-z="100">
+                <!-- Geliştirme süreci: Oyunun nasıl geliştirildiği, karşılaşılan zorluklar ve çözümler burada anlatılacak -->
+                <p>Geliştirme sürecinde, özellikle labirent algoritmalarının uygulanması ve oyuncu deneyiminin optimize edilmesi önemliydi.</p>
+                <p>Karşılaşılan zorluklar arasında çarpışma yönetimi, kamera açıları ve performans optimizasyonu yer aldı.</p>
+            </section>
+
+            <section class="step" data-x="9000" data-y="14000" data-scale="1" data-rotate-x="0" data-rotate-z="0" data-transition-duration="800">
+                <!-- Bu kadar konusmak yeter biraz da koda bakalım -->
+                <p>PlayerMovement scripti, oyuncunun labirentte hareket etmesini sağlar.</p>
+                <p>Oyuncu, klavye ok tuşları veya WASD tuşları ile hareket edebilir.</p>
+                <pre><code class="language-csharp">using UnityEngine;
+
+public class PlayerMovement : MonoBehaviour
+{
+    public float speed = 5f;
+
+    void Update()
+    {
+        float x = Input.GetAxisRaw("Horizontal");
+        float z = Input.GetAxisRaw("Vertical");
+
+        Vector3 movement = new Vector3(x, 0, z);
+
+        transform.Translate(movement.normalized * speed * Time.deltaTime, Space.World);
+    }
+}</code></pre>
+<small class="dim"><!-- I am not dumb enough to give the code away so a fake code here-->I am just showing a snippet.</small>
+            </section>
+
+            <section class="step" data-x="12000" data-y="13000" data-scale="1" data-rotate-x="0" data-rotate-z="90" data-transition-duration="800">
+                <!-- Enough talking, here is an image of the game menu -->
+                <p style="align-self: center; padding-bottom: 20px;">Bütün macera burada başlıyor:</p>
+                <div id="game-menu"></div>
+            </section>
+
+            <section class="step" data-x="15000" data-y="10000" data-scale="2" data-rotate-x="10" data-rotate-z="0" data-transition-duration="800">
+                <!-- And finally the exit image-->
+                <p style="align-self: center; padding-bottom: 20px;">Oyuncu, labirentten çıkmak için mor küpü bulmalıdır.</p>
+                <img src="./assets/images/exit.png" alt="Exit" style="width:100%; image-rendering: pixelated;">
+            </section>
+
+            <section class="step" data-x="20000" data-y="12000" data-scale="1" data-rotate-y="-180" data-rotate-z="100" data-transition-duration="800">
+                <!-- ilginiz için teşekkürler -->
+                <p style="align-self: center; padding-bottom: 20px;">İlginiz için teşekkürler!</p>
+                <button class="px-btn" onclick="setTimeout(() => window.open('https://github.com/umittadelen/UnityMazeGame/releases'), 200)"><small class="csharpfont">Oyunu Buradan indirebilirsiniz</small></button>
+            </section>
+        </main>
+
+        <script src="https://cdn.jsdelivr.net/gh/impress/impress.js@2.0.0/js/impress.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets@11.11.1/highlight.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets@11.11.1/languages/csharp.min.js"></script>
+
+        <script>
+            impress().init();
+            hljs.highlightAll();
+
+            document.getElementById('game-menu').innerHTML = `
+                <img src="./assets/images/game-menu.${navigator.connection?.type === 'cellular' ? 'png' : 'gif'}" alt="Game Menu" style="width:70vw; image-rendering: pixelated;">
+            `;
+        </script>
+    </body>
+</html>

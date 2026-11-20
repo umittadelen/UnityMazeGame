@@ -1,0 +1,103 @@
+body {
+  background: #080b14;
+  color: #f8fafc;
+  font-family: "Nunito", sans-serif;
+  user-select: none;
+}
+
+code {
+    font-family: "JetBrains Mono", monospace;
+    background: #1a202c;
+    color: #f8fafc;
+    padding: 8px;
+    border-radius: 4px;
+    display: block;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+.fallback-message {
+  display: none;
+}
+body.impress-not-supported .fallback-message {
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  z-index: 1000;
+}
+
+.step {
+  width: 1000px;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.o {
+    color: oklch(72.596% 0.18813 51.234);
+}
+
+.g {
+    color: oklch(90.826% 0.2462 130.574);
+}
+
+.y {
+    color: oklch(96.479% 0.21188 110.946);
+}
+
+.p {
+    color: oklch(72.596% 0.18813 251.234);
+}
+
+.dim {
+    color: #a0aec0;
+}
+
+h1 {
+    font-size: 5vw;
+    font-weight: 900;
+}
+p {
+    font-size: 1.5vw;
+    line-height: 1.6;
+    color: #f8fafc;
+    margin: 0;
+    white-space: normal;
+    word-wrap: break-word;
+}
+small {
+    font-size: 1vw;
+}
+
+#game-menu {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px 0;
+}
+
+.px-btn {
+    border-style: solid;
+    border-image: url("../assets/images/btn/b.png") 2 3 5 3 fill;
+    border-width: 12px 18px 30px 18px;
+    padding: 4px 12px;
+    background: none;
+    color: #fff2d8;
+    font-family: inherit;
+    image-rendering: pixelated;
+    cursor: pointer;
+    align-self: center;
+}
+.px-btn:active {
+    border-image: url("../assets/images/btn/bp.png") 4 3 3 3 fill;
+    border-width: 24px 18px 18px 18px;
+}
+.csharpfont {
+    font-family: "JetBrains Mono", monospace;
+}
