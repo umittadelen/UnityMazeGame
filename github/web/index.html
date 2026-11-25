@@ -1,69 +1,109 @@
 <!DOCTYPE html>
 
 <html lang="tr">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
-        <meta name="description" content="Unity ile geliştirilmiş MazeRunner projesinin sunumu.">
-	    <meta name="author" content="Umit Tasdelen">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
-        <title>MazeRunner - Proje Sunumu</title>
+    <meta name="description" content="Unity ile geliştirilmiş MazeRunner projesinin sunumu.">
+    <meta name="author" content="Umittadelen">
 
-        <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+    <title>MazeRunner - Proje Sunumu</title>
 
-        <link rel="shortcut icon" href="./favicon.png">
-        <link rel="apple-touch-icon" href="./apple-touch-icon.png">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=JetBrains+Mono:wght@400;600;700&display=swap"
+        rel="stylesheet">
 
-        <link rel="stylesheet" href="css/presentation.css">
+    <link rel="shortcut icon" href="./favicon.png">
+    <link rel="apple-touch-icon" href="./apple-touch-icon.png">
 
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets@11.11.1/styles/github-dark.min.css">
-    </head>
-    <body style="height: 100%; overflow: hidden;">
-        <div class="fallback-message">
-			<p>Your browser <b>doesn't support the features required</b> by impress.js.</p>
-			<p>For the best experience please use the latest <b>Chrome</b>, <b>Safari</b> or <b>Firefox</b> browser.</p>
-		</div>
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets@11.11.1/styles/github-dark.min.css">
+    <link rel="stylesheet" href="css/presentation.css">
+</head>
 
-        <main id="impress">
+<body style="height: 100%; overflow: hidden;">
+    <div class="fallback-message">
+        <p>Tarayıcınız bu sunum için gereken özellikleri <b>desteklemiyor</b>.</p>
+        <p>En iyi deneyim için güncel <b>Chrome</b>, <b>Safari</b> veya <b>Firefox</b> kullanın.</p>
+    </div>
 
-            <section class="step" data-x="0" data-y="0" data-scale="5" data-rotate-z="90" data-transition-duration="800">
-                <h1 class="g">MazeRunner</h1>
-                <p>Onemli olan bir labirentin içinde kaybolmak değil, <span class="o">onu cozmektir.</span></p>
-                <small class="dim">Umit Tasdelen · Unity 6 · C# · URP</small>
-            </section>
+    <main id="impress" data-perspective="1200" data-transition-duration="1600">
 
-            <section class="step" data-x="5000" data-y="2000" data-scale="2" data-rotate="10" data-transition-duration="800">
-                <p>Oyuncu bir labirente bırakılıyor.<br>Tek hedefi var: <span class="o">çıkışı en kısa sürede bulmak.</span></p>
-                <br><br>
-                <small class="dim">İlham: Backrooms</small>
-            </section>
+        <section class="step" data-x="0" data-y="0" data-z="0">
+            <span class="eyebrow">Unity Kursu · Final Projesi</span>
+            <h1>Maze<span class="acc">Runner</span></h1>
+            <div class="bar"></div>
+            <p class="lead">Önemli olan labirentte kaybolmak değil, onu çözmektir.</p>
+            <div class="pills"><span class="pill">Unity 6</span><span class="pill">C#</span><span
+                    class="pill">URP</span></div>
+            <small>Umittadelen</small>
+        </section>
 
-            <section class="step" data-x="5000" data-y="8000" data-scale="1" data-rotate="90" data-transition-duration="800">
-                <h1>
-                    <span class="y">· keşfet.</span><br>
-                    <span class="o">· yönünü bul.</span><br>
-                    <span class="p">· karar ver.</span>
-                </h1>
-            </section>
+        <section class="step" data-x="2000" data-y="300" data-z="0" data-rotate-x="15" data-rotate-z="10">
+            <span class="eyebrow">01 · Konsept</span>
+            <h2>Karanlık bir labirent,<br>tek bir hedef.</h2>
+            <p class="lead">Oyuncu bir labirente bırakılıyor ve çıkışı en kısa sürede bulmak zorunda.</p>
+            <div class="card" style="margin-top: 12px; width: 100%;">
+                <i>İLHAM</i>
+                <b><span class="pur">Backrooms</span></b>
+                <span>İnternette doğan; sonsuz sarı koridorlar ve loş ışıklarla anlatılan bir hikâye.</span>
+            </div>
+        </section>
 
-            <section class="step" data-x="7000" data-y="10000" data-scale="2" data-rotate="90" data-rotate-x="90" data-rotate-y="90" data-rotate-z="100" data-transition-duration="800">
-                <!-- Enough yapping here is the actual Fikir açıklaması (fikir nereden geldi ve neler bana ilham verdi) -->
-                <p>Bu proje, labirent çözme deneyimini oyuncuya sunmayı amaçlıyor. İlham kaynağım, özellikle <span class="p">Backrooms</span> gibi korku odaklı oyunlar oldu.</p>
-                <p>Oyuncunun labirentte kaybolma ve çıkışı bulma süreci, oyun tasarımında önemli bir yer tutuyor.</p>
-            </section>
+        <section class="step" data-x="4100" data-y="1400" data-z="-400" data-rotate-x="25" data-rotate-y="-25"
+            data-rotate-z="-8">
+            <span class="eyebrow">02 · Oyun deneyimi</span>
+            <h2>Üç temel fikir</h2>
+            <div class="cards three">
+                <div class="card"><i>01</i><b>Keşfet</b><span>Bilinmeyen koridorları araştır.</span></div>
+                <div class="card"><i class="blue">02</i><b>Yönünü bul</b><span>Gittiğin yolu aklında tut.</span></div>
+                <div class="card"><i class="red">03</i><b>Karar ver</b><span>Doğru dönüşü kendin seç.</span></div>
+            </div>
+        </section>
 
-            <section class="step" data-x="8000" data-y="12000" data-scale="1" data-rotate-x="90" data-rotate-z="100">
-                <!-- Geliştirme süreci: Oyunun nasıl geliştirildiği, karşılaşılan zorluklar ve çözümler burada anlatılacak -->
-                <p>Geliştirme sürecinde, özellikle labirent algoritmalarının uygulanması ve oyuncu deneyiminin optimize edilmesi önemliydi.</p>
-                <p>Karşılaşılan zorluklar arasında çarpışma yönetimi, kamera açıları ve performans optimizasyonu yer aldı.</p>
-            </section>
+        <section class="step c" data-x="6100" data-y="2800" data-z="300" data-rotate-x="-20" data-rotate-y="20"
+            data-rotate-z="90">
+            <span class="eyebrow">03 · Ana menü</span>
+            <img id="menu-img" class="shot shotf pixel" src="./assets/images/game-menu.gif" alt="Oyun menüsü">
+            <small>Yeni Oyun · Ayarlar · Krediler · Çıkış</small>
+        </section>
 
-            <section class="step" data-x="9000" data-y="14000" data-scale="1" data-rotate-x="0" data-rotate-z="0" data-transition-duration="800">
-                <!-- Bu kadar konusmak yeter biraz da koda bakalım -->
-                <p>PlayerMovement scripti, oyuncunun labirentte hareket etmesini sağlar.</p>
-                <p>Oyuncu, klavye ok tuşları veya WASD tuşları ile hareket edebilir.</p>
-                <pre><code class="language-csharp">using UnityEngine;
+        <section class="step" data-x="8400" data-y="2600" data-z="0" data-rotate-y="-40" data-rotate-z="0">
+            <span class="eyebrow">04 · Hedef ve kontroller</span>
+            <div class="cols">
+                <img class="shot" src="./assets/images/exit.png" alt="Çıkış">
+                <div>
+                    <h2><span class="pur">Mor</span> küpü <span class="blue">bul.</span></h2>
+                    <p>Labirentten çıkmak için oyuncunun çıkıştaki mor küpe ulaşması gerekir.</p>
+                    <p>Kontroller:</p>
+                    <div class="keys">
+                        <span class="key">W</span><span class="key">A</span><span class="key">S</span><span
+                            class="key">D</span>
+                        <em>veya</em>
+                        <span class="key">↑</span><span class="key">←</span><span class="key">↓</span><span class="key">→</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="step" data-x="10500" data-y="3900" data-z="-600" data-rotate-x="30" data-rotate-z="135">
+            <span class="eyebrow">05 · Geliştirme süreci</span>
+            <h2>Zorluklar ve çözümler</h2>
+            <div class="cards two">
+                <div class="card"><i>01</i><b>Labirent algoritması</b><span>Labirenti kodla üretmek.</span></div>
+                <div class="card"><i>02</i><b>Çarpışma yönetimi</b><span>Oyuncunun duvarlardan geçmemesi.</span></div>
+                <div class="card"><i>03</i><b>Kamera açıları</b><span>Doğru görüş ve oyun hissi.</span></div>
+                <div class="card"><i>04</i><b>Performans</b><span>Akıcı çalışması için optimizasyon.</span></div>
+            </div>
+        </section>
+
+        <section class="step" data-x="12600" data-y="3300" data-z="200" data-rotate-x="-25" data-rotate-y="30"
+            data-rotate-z="0">
+            <span class="eyebrow">06 · Teknik örnek</span>
+            <p class="lead">PlayerMovement scripti oyuncunun hareketini sağlar.</p>
+            <pre><code class="language-csharp">using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -79,39 +119,64 @@ public class PlayerMovement : MonoBehaviour
         transform.Translate(movement.normalized * speed * Time.deltaTime, Space.World);
     }
 }</code></pre>
-<small class="dim"><!-- I am not dumb enough to give the code away so a fake code here-->I am just showing a snippet.</small>
-            </section>
+            <small>Gerçek kodun yalnızca basitleştirilmiş bir örneği.</small>
+        </section>
 
-            <section class="step" data-x="12000" data-y="13000" data-scale="1" data-rotate-x="0" data-rotate-z="90" data-transition-duration="800">
-                <!-- Enough talking, here is an image of the game menu -->
-                <p style="align-self: center; padding-bottom: 20px;">Bütün macera burada başlıyor:</p>
-                <div id="game-menu"></div>
-            </section>
+        <!--
+        <section class="step c" data-x="15000" data-y="4800" data-z="-800" data-scale="2" data-rotate-x="20" data-rotate-z="225">
+            <span class="eyebrow">07 · Canlı demo</span>
+            <h2>Oyunu birlikte deneyelim</h2>
+            <p>Hedef: <span class="pur">mor küpü</span> en kısa sürede bulmak.</p>
+        </section>
+        -->
 
-            <section class="step" data-x="15000" data-y="10000" data-scale="2" data-rotate-x="10" data-rotate-z="0" data-transition-duration="800">
-                <!-- And finally the exit image-->
-                <p style="align-self: center; padding-bottom: 20px;">Oyuncu, labirentten çıkmak için mor küpü bulmalıdır.</p>
-                <img src="./assets/images/exit.png" alt="Exit" style="width:100%; image-rendering: pixelated;">
-            </section>
+        <section class="step c" data-x="15000" data-y="4800" data-z="-800" data-scale="2" data-rotate-x="20" data-rotate-z="225">
+        <!-- <section class="step c" data-x="17800" data-y="3600" data-z="0" data-rotate-y="180" data-rotate-z="0"> -->
+            <span class="eyebrow">Teşekkürler</span>
+            <h2>Dinlediğiniz için teşekkür ederim.</h2>
+            <button class="px-btn"
+                onclick="setTimeout(() => window.open('https://github.com/umittadelen/UnityMazeGame/releases'), 200)">
+                <small>Oyunu buradan indirebilirsiniz</small></button>
+            <small>github.com/umittadelen/UnityMazeGame</small>
+        </section>
+    </main>
 
-            <section class="step" data-x="20000" data-y="12000" data-scale="1" data-rotate-y="-180" data-rotate-z="100" data-transition-duration="800">
-                <!-- ilginiz için teşekkürler -->
-                <p style="align-self: center; padding-bottom: 20px;">İlginiz için teşekkürler!</p>
-                <button class="px-btn" onclick="setTimeout(() => window.open('https://github.com/umittadelen/UnityMazeGame/releases'), 200)"><small class="csharpfont">Oyunu Buradan indirebilirsiniz</small></button>
-            </section>
-        </main>
+    <div class="impress-progressbar">
+        <div></div>
+    </div>
+    <div class="footer"><span>MAZERUNNER · UMITTADELEN</span><span id="counter"></span></div>
+    <div id="timer">0:00</div>
 
-        <script src="https://cdn.jsdelivr.net/gh/impress/impress.js@2.0.0/js/impress.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets@11.11.1/highlight.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets@11.11.1/languages/csharp.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/impress/impress.js@2.0.0/js/impress.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets@11.11.1/highlight.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets@11.11.1/languages/csharp.min.js"></script>
 
-        <script>
-            impress().init();
-            hljs.highlightAll();
+    <script>
+        impress().init();
+        hljs.highlightAll();
 
-            document.getElementById('game-menu').innerHTML = `
-                <img src="./assets/images/game-menu.${navigator.connection?.type === 'cellular' ? 'png' : 'gif'}" alt="Game Menu" style="width:70vw; image-rendering: pixelated;">
-            `;
-        </script>
-    </body>
+        if (navigator.connection?.type === 'cellular') {
+            document.getElementById('menu-img').src = './assets/images/game-menu.png';
+        }
+
+        const steps = [...document.querySelectorAll('.step')];
+        const counter = document.getElementById('counter');
+        document.addEventListener('impress:stepenter', e => {
+            counter.textContent = (steps.indexOf(e.target) + 1) + ' / ' + steps.length;
+        });
+
+        const timer = document.getElementById('timer');
+        let start = Date.now();
+        setInterval(() => {
+            const s = Math.floor((Date.now() - start) / 1000);
+            timer.textContent = Math.floor(s / 60) + ':' + String(s % 60).padStart(2, '0');
+            timer.classList.toggle('over', s >= 300);
+        }, 500);
+        document.addEventListener('keydown', e => {
+            if (e.key.toLowerCase() === 't') timer.classList.toggle('show');
+            if (e.key.toLowerCase() === 'r') start = Date.now();
+        });
+    </script>
+</body>
+
 </html>
